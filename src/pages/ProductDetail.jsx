@@ -53,9 +53,11 @@ export default function ProductDetail() {
           <div className="detail-brand">{product.brand} · Артикул: {product.sku} · {product.categoryName}</div>
           <div style={{ color: 'var(--warn)', fontSize: '.9rem' }}>★ {product.rating.toFixed(1)} / 5</div>
           <div className="detail-price">{fmt(price)}</div>
+          
           <div className="digital-note">
             <b>⚡ Цифровая доставка:</b> ключ активации придёт на e-mail сразу после оплаты. Срок лицензии: {product.term}.
           </div>
+
           <div style={{ margin: '16px 0' }}>
             <label style={{ fontSize: '.85rem', fontWeight: 600, marginBottom: 6, display: 'block' }}>Тип лицензии:</label>
             <div className="license-options">
@@ -74,10 +76,12 @@ export default function ProductDetail() {
               ))}
             </div>
           </div>
+          
           <div className="qty-row">
             <label style={{ fontSize: '.85rem', fontWeight: 600 }}>Кол-во лицензий:</label>
             <input type="number" min="1" max="99" value={qty} onChange={(e) => setQty(+e.target.value || 1)} />
           </div>
+          
           <div className="actions-row">
             <button className="btn" onClick={() => { add(product, license, qty); showToast('Лицензия добавлена в корзину', 'success'); }}>🛒 В корзину</button>
             <button className="btn secondary" onClick={() => { add(product, license, qty); navigate('/checkout'); }}>⚡ Купить сейчас</button>
@@ -85,20 +89,44 @@ export default function ProductDetail() {
               {fav ? '♥' : '♡'} В избранное
             </button>
           </div>
+          
           <div style={{ marginTop: 24 }}>
             <h3 style={{ fontSize: '1rem', marginBottom: 8 }}>Описание</h3>
             <p style={{ fontSize: '.9rem', color: 'var(--muted)', lineHeight: 1.6 }}>{product.description}</p>
+            
             <h3 style={{ fontSize: '1rem', margin: '20px 0 8px' }}>Характеристики</h3>
             <table className="specs">
               <tbody>
                 <tr><td>Артикул</td><td>{product.sku}</td></tr>
+                <tr><td>Бренд</td><td>{product.brand}</td></tr>
                 <tr><td>Тип поставки</td><td>{product.activation}</td></tr>
                 <tr><td>Доставка</td><td>{product.delivery}</td></tr>
                 <tr><td>Срок действия</td><td>{product.term}</td></tr>
                 <tr><td>Типы лицензий</td><td>{product.licenseTypes.join(', ')}</td></tr>
-                <tr><td>Поддержка</td><td>24/7 по e-mail</td></tr>
               </tbody>
             </table>
+
+            {/* Блок отзывов */}
+            <h3 style={{ fontSize: '1rem', margin: '24px 0 12px' }}>Отзывы покупателей</h3>
+            <div style={{ background: '#f8fafc', padding: 16, borderRadius: 12 }}>
+              <div style={{ display: 'flex', gap: 12, marginBottom: 16, borderBottom: '1px solid var(--border)', paddingBottom: 12 }}>
+                <div style={{ width: 40, height: 40, borderRadius: '50%', background: 'var(--primary)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700 }}>А</div>
+                <div>
+                  <div style={{ fontSize: '.9rem', fontWeight: 600 }}>Алексей М. <span style={{ color: 'var(--success)', fontSize: '.75rem', fontWeight: 400 }}>✓ Купил товар</span></div>
+                  <div style={{ color: 'var(--warn)', fontSize: '.8rem', margin: '2px 0' }}>★★★★★</div>
+                  <div style={{ fontSize: '.85rem', color: 'var(--muted)' }}>Ключ пришёл моментально, всё активировалось с первого раза. Отличный магазин!</div>
+                </div>
+              </div>
+              <div style={{ display: 'flex', gap: 12 }}>
+                <div style={{ width: 40, height: 40, borderRadius: '50%', background: '#cbd5e1', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700 }}>Е</div>
+                <div>
+                  <div style={{ fontSize: '.9rem', fontWeight: 600 }}>Елена В. <span style={{ color: 'var(--success)', fontSize: '.75rem', fontWeight: 400 }}>✓ Купил товар</span></div>
+                  <div style={{ color: 'var(--warn)', fontSize: '.8rem', margin: '2px 0' }}>★★★★☆</div>
+                  <div style={{ fontSize: '.85rem', color: 'var(--muted)' }}>Брала Business-лицензию для офиса. Всё официально, чек и ключи прислали.</div>
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
       </div>
